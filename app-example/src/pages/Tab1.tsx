@@ -1,15 +1,18 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonSlide, IonSlides, IonButton, useIonToast  } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonThumbnail, IonImg, 
+  IonButton, IonAvatar, IonChip, IonLabel, IonIcon, IonMenu, IonItem, IonList, IonRouterOutlet } from '@ionic/react';
 import React, { useState } from 'react';
+import { closeCircle } from 'ionicons/icons';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab1.css';
 
-
-
-
 const Tab1: React.FC = () => {
-  const slideOpts = {
-    initialSlide: 1, speed: 400
+
+  type Item = {
+    src: string;
+    text: string;
   };
+  const items: Item[] = [{ src: 'https://pixabay.com/photos/silver-wattle-acacia-dealbata-7442792/', text: 'A picture of a tree' }];
+
   return (
     <IonPage>
       <IonHeader>
@@ -24,6 +27,7 @@ const Tab1: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <ExploreContainer name="Pantalla de inicio + Info museo + Opciones de accesibilidad" />
+
       <IonCard>
       <IonCardHeader>
       <IonCardTitle>Testing Card Title</IonCardTitle>
@@ -31,19 +35,31 @@ const Tab1: React.FC = () => {
       </IonCardHeader>
       </IonCard>
 
-      <IonSlides pager={true} options={slideOpts}>
-      <IonSlide>
-        <h1>Expo 1</h1>
-      </IonSlide>
-      <IonSlide>
-        <h1>Expo 2</h1>
-      </IonSlide>
-      <IonSlide>
-        <h1>Expo 3</h1>
-      </IonSlide>
-    </IonSlides>
+      
+ 
+    <IonChip color="warning">
+        <IonAvatar>
+          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" />
+        </IonAvatar>
+        <IonLabel>Avatar Chip</IonLabel>
+        <IonIcon icon={closeCircle}></IonIcon>
+      </IonChip>
 
-    <IonButton>Default</IonButton>        
+    <IonButton>Default</IonButton> 
+
+    
+    <IonList>
+      {items.map((image, i) => (
+        <IonItem key={i}>
+          <IonThumbnail slot="start">
+            <IonImg src={"https://pixabay.com/photos/silver-wattle-acacia-dealbata-7442792/"}/>
+          </IonThumbnail>
+          <IonLabel>{image.text}</IonLabel>
+        </IonItem>
+      ))}
+    </IonList>
+ 
+
       </IonContent>
     </IonPage>
     );
